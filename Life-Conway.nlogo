@@ -1,3 +1,6 @@
+patches-own[
+  vecVivas
+]
 to setup
   ca
   ask patches[
@@ -7,14 +10,13 @@ to setup
 end
 
 to go
-  ask patches with[pcolor = black][
-    if neighbors4 with[pcolor = white] = 3 [set pcolor white]
-  ]
-  ask patches with[pcolor = white] [
-    if count(neighbors4 with[pcolor = white]) < 2 [
-      set pcolor black]
-    if count(neighbors4 with[pcolor = white]) > 3 [
-      set pcolor black]
+  ask patches[set vecVivas count neighbors with[pcolor = white]]
+  ask patches[
+    ifelse pcolor = black [
+      if vecVivas = 3 [set pcolor white] ; Si esta muerta y tiene 3 vivas, nace
+    ] [
+      if not (vecVivas = 2 or vecVivas = 3) [set pcolor black]
+    ]
   ]
   tick
 end
@@ -22,24 +24,24 @@ end
 GRAPHICS-WINDOW
 210
 10
-647
-448
+721
+522
 -1
 -1
-13.0
+5.0
 1
-10
+5
 1
 1
 1
 0
+0
+0
 1
-1
-1
--16
-16
--16
-16
+-50
+50
+-50
+50
 0
 0
 1
@@ -47,10 +49,10 @@ ticks
 30.0
 
 BUTTON
-60
-73
-133
-106
+5
+48
+78
+81
 setup
 Setup
 NIL
@@ -65,9 +67,9 @@ NIL
 
 BUTTON
 113
-131
+88
 176
-164
+121
 Go
 go
 T
@@ -82,9 +84,9 @@ NIL
 
 BUTTON
 6
-130
+87
 98
-163
+120
 Go once
 go
 NIL
@@ -98,15 +100,15 @@ NIL
 1
 
 SLIDER
-19
-18
-191
-51
+5
+10
+177
+43
 densidad
 densidad
 0
 1
-0.18
+0.23
 .01
 1
 NIL
