@@ -1,6 +1,7 @@
 turtles-own[
-  id-tortu
+  ;id-tortu ;no es necesario, ya que existe [who] of turtles que ya las identifica
   vecinas
+  distNodo
 ]
 globals[
   tortus
@@ -36,23 +37,35 @@ to go
 end
 
 to etiquetar
-  ask turtles[
-   set label ""
-   set label count my-links
-   set label-color red
-  ]
-end
-
-to distancia
-  ask turtles [set label ""]
-  ask turtles with [id-tortu = nodo][
-    set label "-"
-    set label-color red
-    ask other turtles[
-
+;  ask turtles[
+;   set label ""
+;   set label count my-links
+;   set label-color red
+;  ]
+  foreach [who] of turtles [
+    x -> ask turtle x [
+      set label x
+      set label-color red
     ]
   ]
 end
+
+;to distancia
+;  ask turtles [set label ""]
+;  ask turtles with [id-tortu = nodo][
+;    set label "-"
+;    set label-color red
+;    ask other turtles[
+;
+;    ]
+;  ]
+;end
+
+;to nodosVecinos [lisNodos nodo1] ;devuelve que nodos de una lista contienen como vecino a nodo
+;  ask turtles with[id-tortu = nodo1][
+;    filter [x -> member? x vecinas] lisNodos
+;  ]
+;end
 @#$#@#$#@
 GRAPHICS-WINDOW
 429
