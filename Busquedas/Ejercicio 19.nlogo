@@ -3,12 +3,12 @@ __includes [ "BFS.nls" "LayoutSpace.nls"]
 
 to-report applicable-transitions
   report (list
-    ( list "aumentar d1" ([ s -> ( list (first s + 100) 1) ] ))
-    ( list "aumentar d2" ([ s -> ( list (first s + 10) 2) ] ))
-    ( list "aumentar d3" ([ s -> ( list (first s + 1) 3) ] ))
-    ( list "disminuir d1" ([ s -> ( list (first s - 100) -1) ] ))
-    ( list "disminuir d2" ([ s -> ( list (first s - 10) -2) ] ))
-    ( list "disminuir d3" ([ s -> ( list (first s - 1) -3) ] ))
+    ( list "aumentar d1" ([ s -> ( list (first s + 100) "+1") ] ))
+    ( list "aumentar d2" ([ s -> ( list (first s + 10) "+2") ] ))
+    ( list "aumentar d3" ([ s -> ( list (first s + 1) "+3") ] ))
+    ( list "disminuir d1" ([ s -> ( list (first s - 100) "-1") ] ))
+    ( list "disminuir d2" ([ s -> ( list (first s - 10) "-2") ] ))
+    ( list "disminuir d3" ([ s -> ( list (first s - 1) "-3") ] ))
     )
 end
 
@@ -39,15 +39,26 @@ end
 
 to-report lista-digitos [num]
   let res []
-  set res fput read-from-string item 2 (word 400) res
-  set res fput read-from-string item 1 (word 400) res
-  set res fput read-from-string item 0 (word 400) res
+  set res fput read-from-string item 2 (word num) res
+  set res fput read-from-string item 1 (word num) res
+  set res fput read-from-string item 0 (word num) res
   report res
 end
 
-to compruebaDigitos [s]
+to-report compruebaDigitos [s]
   ;s -> [numero (-)digito]
-  ifelse (first last s = "-" and item )
+  let digs lista-digitos(first s)
+  let signo first last s
+  let dig (read-from-string last last s) - 1
+
+  show s
+  show "El primero de s"
+  show first s
+  show "Digitos: "
+  show digs
+  show "Signo: "show signo
+
+  report ifelse-value (item dig digs = 0 and signo = "+")[false][true]
 end
 
 to test
@@ -131,7 +142,7 @@ INPUTBOX
 180
 70
 Initial_State
-[100 0]
+[123 0]
 1
 0
 String
