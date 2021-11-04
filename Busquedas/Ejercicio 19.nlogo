@@ -17,9 +17,6 @@ to-report valid? [s]
   report ns >= 100 and ns <= 999
   and (not member? ns (read-from-string Prohibidos))
   and compruebaDigitos(s)
-
-
-  ;show lista-digitos (900)
 end
 
 to-report AI:children-states
@@ -51,14 +48,9 @@ to-report compruebaDigitos [s]
   let signo first last s
   let dig (read-from-string last last s) - 1
 
-  show s
-  show "El primero de s"
-  show first s
-  show "Digitos: "
-  show digs
-  show "Signo: "show signo
-
-  report ifelse-value (item dig digs = 0 and signo = "+")[false][true]
+  report ifelse-value (
+    (item dig digs = 0 and signo = "+") or
+    (item dig digs = 9 and signo = "-"))[false][true]
 end
 
 to test
@@ -142,7 +134,7 @@ INPUTBOX
 180
 70
 Initial_State
-[123 0]
+[555 0]
 1
 0
 String
