@@ -2,7 +2,6 @@
 
 __includes [ "BFS.nls" "LayoutSpace.nls"]
 
-
 ;--------------- Customizable Reports -------------------
 
 ; These reports must be customized in order to solve different problems using the
@@ -15,16 +14,16 @@ __includes [ "BFS.nls" "LayoutSpace.nls"]
 
 to-report applicable-transitions
   report (list
-              (list "Mover Col" (filter [ x, r -> x != "c"])) ;y hacerle la "inversa" a x
-              (list "Mover Oveja" (filter [ x, r -> x != "o"])) ;queda tambien mover de orilla(actualizar r)
-              (list "Mover Lobo" (filter [ x, r -> x != "l"]))
-              (list "Mover Granjero" (filter [ x, r -> x]))
+    (list "Mover Col" ([x -> moverseConElem "c" x])) ;y hacerle la "inversa" a x
+      (list "Mover Oveja" ([x -> moverseConElem "o" x])) ;queda tambien mover de orilla(actualizar r)
+        (list "Mover Lobo" ([x -> moverseConElem "l" x]))
+    (list "Mover Granjero" ([x -> moverseConElem "" x]))
   )
 end
 
 ; valid? is a boolean report to say which states are valid
 to-report valid? [x]
-  report ifelse-value ("co" member? sort x or "lo" member? sort x) [false][true]
+  report ifelse-value (member? "co" sort x or member? "lo" sort x) [false][true]
 end
 
 ; children-states is an agent report that returns the children for the current state.
@@ -74,6 +73,16 @@ to test
     ]
     style
   ]
+end
+
+;--------Recursos------------------------
+
+to-report moverseConElem [letra estado]
+  report list (remove letra first estado) (1 - last estado)
+end
+
+to-report cadenaInversa [estado]
+  report filter member? [] estado first
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -137,7 +146,7 @@ INPUTBOX
 180
 70
 Initial_State
-[col 0]
+[\"col\" 0]
 1
 0
 String
@@ -148,7 +157,7 @@ INPUTBOX
 180
 130
 Final_State
-[col 1]
+[\"col\" 1]
 1
 0
 String
