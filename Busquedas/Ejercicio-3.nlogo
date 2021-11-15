@@ -78,11 +78,11 @@ end
 ;--------Recursos------------------------
 
 to-report moverseConElem [letra estado]
-  report list (remove letra first estado) (1 - last estado)
+  report list cadenaInversa (remove letra estado) (1 - last estado)
 end
 
-to-report cadenaInversa [estado]
-  report filter member? [] estado first
+to-report cadenaInversa [cadena]
+  report filter [x -> not member? x cadena] ["c" "o" "l"]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -146,7 +146,7 @@ INPUTBOX
 180
 70
 Initial_State
-[\"col\" 0]
+[\"c\" \"o\" \"l\" 0]
 1
 0
 String
@@ -157,7 +157,7 @@ INPUTBOX
 180
 130
 Final_State
-[\"col\" 1]
+[\"c\" \"o\" \"l\" 1]
 1
 0
 String
