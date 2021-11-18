@@ -6,4 +6,7 @@
 
 ---
 
-<p style="color: yellow;">Desarrollo de soluciones para ejercicios de clase y de la vida</p>
+```diff
++ Desarrollo de soluciones para ejercicios de clase y de la vida
+
+```
