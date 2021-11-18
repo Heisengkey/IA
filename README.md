@@ -7,6 +7,6 @@
 ---
 
 ```diff
-+ Desarrollo de soluciones para ejercicios de clase y de la vida
+ +++ Desarrollo de soluciones para ejercicios de clase y de la vida
 
 ```
