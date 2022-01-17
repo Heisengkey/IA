@@ -2,7 +2,12 @@
 
 #Pedro Viegas
 
+from platform import system
 from estado import *
+import os
+import time
+
+os.system("")
 
 def bfs(estadoInicial, estadoFinal): #function for BFS
 
@@ -11,7 +16,7 @@ def bfs(estadoInicial, estadoFinal): #function for BFS
 
     while cola:
 
-        s = estado(cola.pop(0))
+        s = cola.pop(0)
 
         if s not in visitado:
 
@@ -24,6 +29,33 @@ def bfs(estadoInicial, estadoFinal): #function for BFS
 def aplicaTransiciones(estado):
     # Aplica todas las transiciones definidas a nuestro estado
     # Comprueba que los estados generados por las transiciones son estados validos
-    return estado
+    return [estado.aplicaTransicion("R"), estado.aplicaTransicion("F"), estado.aplicaTransicion("U"), estado.aplicaTransicion("X"), estado.aplicaTransicion("Y"), estado.aplicaTransicion("Z")]
 
-print(bfs([[1, 2, 3, 4], 0], [[4, 3, 2, 1], 0]))
+cubo = estado(["yvr", "yvn", "yan", "yar",
+                "bvr", "bvn", "ban", "bar"])
+
+cubo_solved = estado(["yvr", "yvn", "yan", "yar",
+                "bvr", "bvn", "ban", "bar"])
+
+# res = bfs(cubo, cubo_solved)
+
+# cuboR = estado(estadoS_R)
+# print(cubo)
+# print(cubo.esFinal())
+os.system("cls")
+os.system("clear")
+cubo.pintaCubo()
+for i in range(4):
+    time.sleep(0.5)
+    os.system("cls")
+    os.system("clear")
+    cubo = cubo.aplicaTransicion("B")
+    cubo.pintaCubo()
+
+
+# print("\tB", "B", "", "", "", "\n")
+# print("\tB", "B", "", "", "", "\n")
+# print("   L", "L", "\tU", "U", "R", "R", "D", "D\n")
+# print("   L", "L", "\tU", "U", "R", "R", "D", "D\n")
+# print("\tF", "F", "", "", "", "\n")
+# print("\tF", "F", "", "", "", "\n")
