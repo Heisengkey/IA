@@ -24,6 +24,7 @@ def bfs(estadoInicial): #function for BFS
         if s.getValor() not in visitado:
 
             visitado.append(s.getValor())
+
             cola += aplicaTransiciones(s)    # Aplica las transiciones posibles al estado actual y las añade a la cola
         i += 1
         if s.final:
